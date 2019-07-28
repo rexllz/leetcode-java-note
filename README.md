@@ -11,8 +11,6 @@ Input: [0,1,0,3,12]
 Output: [1,3,12,0,0]
 ```
 
-<!--more-->
-
 copy-array:
 
 ```java
@@ -2247,11 +2245,11 @@ class Solution {
 
 ## 背包问题
 
-![dp0](dp0.jpg)
+![dp0](<https://raw.githubusercontent.com/rexllz/leetcode-java-note/master/dp0.jpg>)
 
 贪心算法无法得到最优解
 
-![dp1](dp1.jpg)
+![dp1](<https://raw.githubusercontent.com/rexllz/leetcode-java-note/master/dp1.jpg>)
 
 递归解决
 
