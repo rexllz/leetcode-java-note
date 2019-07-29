@@ -1,4 +1,4 @@
-# 数组
+# Arrays
 
 ## 283. Move Zeroes
 
@@ -410,7 +410,7 @@ public class Solution {
 }
 ```
 
-# 查找表
+# HashSet/Map
 
 ## 349. Intersection of Two Arrays
 
@@ -1429,7 +1429,7 @@ class Solution {
 }
 ```
 
-# 二叉树
+# Binary Tree
 
 ## 104. Maximum Depth of Binary Tree
 
@@ -1873,7 +1873,7 @@ class Solution {
 }
 ```
 
-# 递归
+# Recursive
 
 ## 131. Palindrome Partitioning
 
@@ -2182,7 +2182,7 @@ class Solution {
 }
 ```
 
-# 动态规划
+# Dynamic Programming
 
 ## 70. Climbing Stairs
 
@@ -2243,15 +2243,15 @@ class Solution {
 
 动态规划实现
 
-## 背包问题
+## **Knapsack Problem**
 
 ![dp0](<https://raw.githubusercontent.com/rexllz/leetcode-java-note/master/dp0.jpg>)
 
-贪心算法无法得到最优解
+Greedy algorithm can't get the optimal solution
 
 ![dp1](<https://raw.githubusercontent.com/rexllz/leetcode-java-note/master/dp1.jpg>)
 
-递归解决
+Recursive solution
 
 ```java
 public static int maxbag(int[] w, int[] v, int index, int c){
@@ -2380,7 +2380,7 @@ class Solution {
 }
 ```
 
-递归
+recursive
 
 ```java
 class Solution {
@@ -2404,7 +2404,7 @@ class Solution {
 }
 ```
 
-记忆化递归
+recursive with record
 
 ```java
 class Solution {
