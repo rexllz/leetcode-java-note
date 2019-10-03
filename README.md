@@ -2939,6 +2939,173 @@ class Solution {
 }
 ```
 
+## 91. Decode Ways
+
+A message containing letters from `A-Z` is being encoded to numbers using the following mapping:
+
+```
+'A' -> 1
+'B' -> 2
+...
+'Z' -> 26
+```
+
+Given a **non-empty** string containing only digits, determine the total number of ways to decode it.
+
+**Example 1:**
+
+```
+Input: "12"
+Output: 2
+Explanation: It could be decoded as "AB" (1 2) or "L" (12).
+```
+
+**Example 2:**
+
+```
+Input: "226"
+Output: 3
+Explanation: It could be decoded as "BZ" (2 26), "VF" (22 6), or "BBF" (2 2 6).
+```
+
+```java
+class Solution {
+    public int numDecodings(String s) {
+        // corner case, e.g. '022' returns 0
+        if (s.charAt(0) == '0') {
+            return 0;
+        }
+        
+        int[] dp = new int[s.length()];
+        dp[0] = 1;
+        for (int i = 1; i < s.length(); i++) {
+            int n = s.charAt(i) - '0';
+            int pre = s.charAt(i - 1) - '0';
+            /* current digit is from 1->9, then the current number of ways of decoding
+            the message is at least the number of ways calculated until the previous one */
+            if (n >= 1 && n <= 9) {
+                dp[i] = dp[i - 1];
+            }
+            /*  check whether the adjacent two digits 
+                are from 10 -> 26, including 10, 20, etc */
+            if (pre != 0) {
+                int twoDigit = Integer.parseInt(s.substring(i - 1, i + 1));
+                if (twoDigit >= 1 && twoDigit <= 26) {
+                    dp[i] = (i == 1) ? (dp[i] + 1) : (dp[i] + dp[i - 2]);
+                }
+            }
+        }
+        return dp[dp.length - 1];
+    }
+}
+```
+
+## 62. Unique Paths
+
+A robot is located at the top-left corner of a *m* x *n* grid (marked 'Start' in the diagram below).
+
+The robot can only move either down or right at any point in time. The robot is trying to reach the bottom-right corner of the grid (marked 'Finish' in the diagram below).
+
+How many possible unique paths are there?
+
+![img](https://assets.leetcode.com/uploads/2018/10/22/robot_maze.png)
+Above is a 7 x 3 grid. How many possible unique paths are there?
+
+**Note:** *m* and *n* will be at most 100.
+
+**Example 1:**
+
+```
+Input: m = 3, n = 2
+Output: 3
+Explanation:
+From the top-left corner, there are a total of 3 ways to reach the bottom-right corner:
+1. Right -> Right -> Down
+2. Right -> Down -> Right
+3. Down -> Right -> Right
+```
+
+**Example 2:**
+
+```
+Input: m = 7, n = 3
+Output: 28
+```
+
+```java
+class Solution {
+    public int uniquePaths(int m, int n) {
+        int[][] path = new int[m][n];
+        path[0][0] = 1;
+        for(int i = 1; i<m; i++){
+            path[i][0] = path[i-1][0];
+        }
+        for(int i = 1; i<n; i++){
+            path[0][i] = path[0][i-1];
+        }
+        for(int i = 1; i<m; i++){
+            for(int j = 1; j<n; j++){
+                path[i][j] = path[i-1][j] + path[i][j-1];
+            }
+        }
+        return path[m-1][n-1];
+    }
+}
+```
+
+## 63. Unique Paths II
+
+A robot is located at the top-left corner of a *m* x *n* grid (marked 'Start' in the diagram below).
+
+The robot can only move either down or right at any point in time. The robot is trying to reach the bottom-right corner of the grid (marked 'Finish' in the diagram below).
+
+Now consider if some obstacles are added to the grids. How many unique paths would there be?
+
+![img](https://assets.leetcode.com/uploads/2018/10/22/robot_maze.png)
+
+An obstacle and empty space is marked as `1` and `0` respectively in the grid.
+
+**Note:** *m* and *n* will be at most 100.
+
+**Example 1:**
+
+```
+Input:
+[
+  [0,0,0],
+  [0,1,0],
+  [0,0,0]
+]
+Output: 2
+Explanation:
+There is one obstacle in the middle of the 3x3 grid above.
+There are two ways to reach the bottom-right corner:
+1. Right -> Right -> Down -> Down
+2. Down -> Down -> Right -> Right
+```
+
+```java
+class Solution {
+    public int uniquePathsWithObstacles(int[][] obstacleGrid) {
+        int m = obstacleGrid.length;
+        int n = obstacleGrid[0].length;
+        obstacleGrid[0][0]=(obstacleGrid[0][0]==1 ? 0 : 1);
+        for(int i = 1; i<m; i++){
+            obstacleGrid[i][0]=(obstacleGrid[i][0]==1 ? 0 : obstacleGrid[i-1][0]);
+        }
+        for(int i = 1; i<n; i++){
+            obstacleGrid[0][i]=(obstacleGrid[0][i]==1 ? 0 : obstacleGrid[0][i-1]);
+        }
+        for(int i = 1; i<m; i++){
+            for(int j = 1; j<n; j++){
+                obstacleGrid[i][j]=(obstacleGrid[i][j]==1 ? 0 : obstacleGrid[i-1][j] + obstacleGrid[i][j-1]);
+            }
+        }
+        return obstacleGrid[m-1][n-1];
+    }
+}
+```
+
 
 
 # Greedy Algorithm
